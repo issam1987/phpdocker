@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: php-apache
+    build:
+      context: ./
+    volumes:
+      - ./src:/var/www/html/
+    depends_on:
+      - db
+    ports:
+      - 8000:80
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: 1234
+        MYSQL_DATABASE: docker
+        MYSQL_USER: issam
+        MYSQL_PASSWORD: 1234
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d
+      - ./mysql_data:/var/lib/mysql
+    ports:
+        - "9906:3306"
+  phpmya:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: db
+      PMA_USER: issam
+      PMA_PASSWORD: 1234
+      UPLOAD_LIMIT: 20M
+    ports:
+    - 8890:80
