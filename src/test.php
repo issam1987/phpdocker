@@ -25,6 +25,7 @@
                 print($e);
               echo "Erreur : " . $e->getMessage();
             }
+            
         ?>
     </body>
 </html>
