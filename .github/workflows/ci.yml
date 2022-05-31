@@ -12,4 +12,4 @@ jobs:
       - name: PHPStan Static Analysis
         uses: php-actions/phpstan@master
         with:
-          path: src/ inc/
+          path: src/
